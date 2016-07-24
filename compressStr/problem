@@ -1,0 +1,9 @@
+String compression
+
+Write a function compress(str), which shortens strings by reducing consecutive character repetitions:
+
+e.g.
+
+input: aaaabbaaaababbbcccccccccccc
+return value: a4b2a4b1a1b3c12
+Note: input string will only contain [a-z]+
