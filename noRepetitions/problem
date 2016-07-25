@@ -1,0 +1,8 @@
+In a given text, if there are two or more identical characters in sequence, delete the repetitions and leave only the first character.
+
+For example:
+
+Input: Shellless mollusk lives in wallless house in wellness. Aaaarrghh!
+
+
+Output: Sheles molusk lives in wales house in welnes. Aargh!
