@@ -4,12 +4,12 @@
 
     function compress(str) {
         var result = '';
-        var regex = /^[a-zA-Z\,\?\.!\s\']+$/;
+        var regex = /^[a-zA-Z\,\?\.!\s\'\-)]+$/;
         var result = '';
 
 
         while(regex.test(str)) {
-            var res = str.match(/^[a-zA-Z\,\?\.!\s\']/);
+            var res = str.match(/^[a-zA-Z\,\?\.!\s\'\-)]/);
 
             if(res[0]) {
 
@@ -18,11 +18,15 @@
                 else if(res[0] === "'")
                     res[0] = '\'';
                 else if(res[0] === ',')
-                    res[0] = '\,';
+                    res[0] = ',';
                 else if(res[0] === '!')
-                    res[0] = '\!';
+                    res[0] = '!';
+                else if(res[0] === ')')
+                    res[0] = ')';
+                else if(res[0] === '-')
+                    res[0] = '-';
 
-                var anotherregex = '^(' + res[0] + ')+';
+                var anotherregex = '^([' + res[0] + '])+';
 
                 str = str.replace(new RegExp(anotherregex), function(a, b) {
 
