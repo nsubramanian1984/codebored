@@ -7,10 +7,17 @@
     fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
         if (line !== "") {
 
-            let re = /(\d+)\s(\d+)\s(\d+)/;
-            line.match(re);
+            // let re = /(\d+)\s(\d+)\s(\d+)/;
+            // line.match(re);
 
-            let fizz = RegExp.$1, buzz = RegExp.$2, n = RegExp.$3;
+            // let fizz = RegExp.$1, buzz = RegExp.$2, n = RegExp.$3;
+
+            // Does it really require a regExp to get values.
+            // could have used line.split(' ')
+
+            let arr = line.split(' ');
+            arr = arr.map(Number);
+            let fizz = arr[0], buzz = arr[1], n = arr[2]
 
             let count = 1, fizzbuzz = 0, result = '';
 
