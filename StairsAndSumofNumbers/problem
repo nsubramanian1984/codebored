@@ -1,0 +1,40 @@
+Print Stair case made up of symbols.
+
+E.g. Given an integer 10, print 10 lines of '#' as below.
+Last line does not have space in front.
+
+         #
+        ##
+       ###
+      ####
+     #####
+    ######
+   #######
+  ########
+ #########
+##########
+
+1 >= N <= 100
+
+To run program using node:
+=> node staircase.js <N>
+
+
+Print Sum of Numbers read from a file.
+First line is the input N, denoting the size of the array.
+From next line, integers are listed and separated by line feed character.
+
+Input:
+
+6
+1
+2
+3
+4
+10
+11
+
+Output: 31
+
+To run program using node:
+=> node sumofNumbers.js <input-file>
