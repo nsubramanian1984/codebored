@@ -1,0 +1,46 @@
+Our warehouses usually have lots of boxes of shoes on their shelves. These boxes are also frequently moved within shelves, storage racks, or warehouses. Deciding where each box should be stored is complicated, as there are many variables to account for (e.g., the time it takes to retrieve an item, or the item's proximity to other products). For the purposes of this challenge, we've reduced this complex problem into something a bit simpler.
+
+Let's say we have one shelf that holds a single line of  boxes. In other words, there are  positions on a long shelf, and each position can hold a single box.
+
+There are  boxes on the shelf, and each box has an ID number associated with it. Business needs often require this ordering be changed, so the warehouse employees receive  queries to rearrange the boxes throughout the day. Each query is in the form l r, and the query is executed by moving all boxes in the inclusive range [l,r] (1 <= l <= r <= N) to the head (front) of the shelf.
+
+As warehouse developers, we should be able to identify the final position of any particular box. Given M queries and the initial ordering of all N boxes, can you find the final ordering of the box IDs on the shelf?
+
+Input Format
+
+The first line contains an integer, N, denoting the number of boxes we can store on our shelf.
+The second line contains N space-separated integers in the inclusive range from 1 to N describing the respective initial position for each box on the shelf. The third line contains a single integer, M, denoting the number of queries described in the Problem Statement above.
+Each of the M subsequent lines describes a query in the form of two space-separated integers, l and r, defining the respective left and right boundaries for the interval of boxes that needs to be moved to the head (front) of the shelf.
+
+Constraints
+
+1 <= N <= 100000,
+1 <= ID <= N, and all IDs are unique
+1 <= M <= 100000
+1 <= l <= r <= N
+
+Output Format
+
+Print N space-separated integers denoting the ID number of each box with respect to its final position on the shelf.
+
+Sample Input
+
+6
+1 2 3 4 5 6
+3
+4 5
+3 4
+2 3
+
+Sample Output
+
+2 4 1 5 3 6
+
+Explanation
+
+The shelf initially looks like this: [1,2,3,4,5,6] . We execute our queries in the following order:
+
+Move the 4 and 5 items on the shelf to the front, so our shelf looks like this: [4,5,1,2,3,6]
+Move the 3 and 4 items on the shelf to the front, so our shelf looks like this: [1,2,4,5,3,6]
+Move the 2 and 3 items on the shelf to the front, so our shelf looks like this: [2,4,1,5,3,6]
+We then print this final ordering of ID numbers as our answer.
