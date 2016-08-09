@@ -1,0 +1,25 @@
+Problem
+
+Implement a circular array of size N, and query the elements at specific positions after K rotations.
+
+Input;
+3 2 3
+1 2 3
+0
+1
+2
+
+First line contains values for size N, rotations K and number of positional queries after K rotations.
+Second line contains elements of the array
+Subsequent lines contains values for position queries. In above case, there are 3 rotations and three values separated by line-feed character.
+
+Output:
+2
+3
+1
+
+Explanation:
+Before rotation   : [ 1, 2, 3 ]
+After rotation #1 : [ 3, 1, 2 ]
+After rotation #2 : [ 2, 3, 1 ]
+
