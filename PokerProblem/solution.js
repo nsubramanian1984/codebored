@@ -28,7 +28,82 @@
                 return '4';
         }
 
-        let resultStr = "";
+        function count(value, list) {
+            let occur = 0;
+
+            list.forEach(elem => {
+                if (elem === value)
+                    ++occur;
+            });
+
+            return occur;
+        }
+
+        function determineThreeOfaKind(tuple, list) {
+
+            let highRank = -1;
+
+            for (let elem of tuple) {
+                let occurrences = count(elem, list);
+
+                if (occurrences === 3) {
+
+                    highRank = elem;
+                    break;
+                }
+            }
+
+            return highRank;
+
+        }
+
+        function determineAPair(tuple, list) {
+            let highRank = -1;
+
+            for (let elem of tuple) {
+                let occurrences = count(elem, list);
+
+                if (occurrences === 2) {
+                    highRank = elem;
+                    break;
+                }
+            }
+
+            return highRank;
+        }
+
+        function determineTwoPairsHighRank(tuple, list) {
+            let highRank = -1;
+
+            for (let elem of tuple) {
+                let occurrences = count(elem, list);
+
+                if (occurrences === 2) {
+                    if (highRank === -1)
+                        highRank = elem;
+                    else if (parseInt(highRank) < parseInt(elem))
+                        highRank = elem;
+                }
+            }
+
+            return highRank;
+        }
+
+        function determineWinner(left, right) {
+            if (left.score < right.score)
+                return "left";
+            else if (left.score === right.score) {
+                if (left.highrank === right.highrank)
+                    return "none";
+                else
+                    return parseInt(left.highrank) > parseInt(right.highrank) ? "left" : "right";
+            }
+            else
+                return "right";
+        }
+
+
+        let leftHandScore, rightHandScore;
 
         for (let i = 0; i < 2; i++) {
             let result = [];
@@ -36,53 +111,70 @@
                 result.push(rank(elm.substr(0, 1)));
             });
 
-
             result = result.sort();
+            //console.log(result);
+
             //create tuple of ranks
-            var rankTuple = [];
+            let rankTuple = [];
             result.forEach(function (elem, index) {
                 if (!rankTuple.includes(elem))
                     rankTuple.push(elem);
             });
 
+            //console.log(rankTuple);
+
             if (rankTuple.length === 2) {
                 // might be a full house or four of a kind
-                if (i === 0)
-                    resultStr = "Left hand: ";
-                else
-                    resultStr += ", Right hand: ";
+                // there is a chance for three of a kind and a pair.
+                // e.g: 8C 8S KC KH 8D
 
-                resultStr += "Full house or four of a kind.";
+                if (i === 0)
+                    leftHandScore = 4;
+                else
+                    rightHandScore = 4;
+
             } else if (rankTuple.length === 3) {
                 // might be a three of a kind or two pairs
 
-                if (i === 0)
-                    resultStr = "Left hand: ";
-                else
-                    resultStr += ", Right hand: ";
+                if (i === 0) {
 
-                resultStr += "Three of a kind or two pairs";
+                    let highRank = determineThreeOfaKind(rankTuple, result);
+                    if (highRank !== -1)
+                        leftHandScore = { "highrank": highRank, "score": 7 };
+                    else
+                        leftHandScore = { "highrank": determineTwoPairsHighRank(rankTuple, result), "score": 8 };
+                }
+                else {
+
+                    let highRank = determineThreeOfaKind(rankTuple, result);
+                    if (highRank !== -1)
+                        rightHandScore = { "highrank": highRank, "score": 7 };
+                    else
+                        rightHandScore = { "highrank": determineTwoPairsHighRank(rankTuple, result), "score": 8 };
+                }
 
             } else if (rankTuple.length === 4) {
 
                 if (i === 0)
-                    resultStr = "Left hand: ";
+                    leftHandScore = { "highrank": determineAPair(rankTuple, result), "score": 9 };
                 else
-                    resultStr += ", Right hand: ";
+                    rightHandScore = { "highrank": determineAPair(rankTuple, result), "score": 9 };
 
-                    resultStr += "A pair";
             } else {
                 // dig thru the cards to see what we have got
                 // Royal flush, straight flush, flush, straight, high card
-                if (i === 0)
-                    resultStr = "Left hand: ";
-                else
-                    resultStr += ", Right hand: ";
 
-                    resultStr += "Royal flush/Straight flush/Flush/Straight/High card";
+                if (i === 0)
+                    leftHandScore = 10;
+                else
+                    rightHandScore = 10;
             }
         }
-        console.log(resultStr);
+
+        //console.log("Left: " + leftHandScore.highrank + " " + leftHandScore.score);
+        //console.log("Right: " + rightHandScore.highrank + " " + rightHandScore.score);
+
+        console.log(determineWinner(leftHandScore, rightHandScore));
     }
 
     //Sample code to read in test cases:
