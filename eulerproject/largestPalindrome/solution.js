@@ -23,7 +23,7 @@
     }
 
 
-    const LIMIT = 100; // 4 million
+    const LIMIT = 100;
 
     let maxPalin = 0;
 
