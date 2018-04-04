@@ -68,9 +68,6 @@
                 theList = theList.sort();
             }
         }
-
-
-
     }
 
     // console.log(theList);

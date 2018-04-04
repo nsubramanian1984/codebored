@@ -74,7 +74,7 @@ let libPrime = {
         function getList(maxValue) {
             let arr = [];
 
-            for (let index = 1; index <= maxValue; index++)
+            for (let index = 2; index <= maxValue; index++)
                 arr.push(index);
 
             return arr;
