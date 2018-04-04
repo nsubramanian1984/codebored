@@ -5,8 +5,6 @@ let libPrime = {
         for (let min = 2; min <= Math.sqrt(value); min++) {
             let divisor = Math.floor(value / min);
 
-            // temp is not a prime.
-            // if it could be divisible by a number within the range 2 to sqrt(number).
             if (divisor * min === value) {
                 flag = false;
                 break;
@@ -16,13 +14,24 @@ let libPrime = {
         return flag;
     },
 
+    isEvenNumber: function(value) {
+        let divisor = Math.floor(value / 2);
+
+        if(divisor * 2 === value)
+            return true;
+
+        return false;
+    },
+
     getFirstPrimeAfter: function getFirstPrimeAfter(value) {
 
         let that = this;
         let prime = -1;
 
         while (true) {
-            if (that.isPrime(++value)) {
+            ++value;
+
+            if (!that.isEvenNumber(value) && that.isPrime(value)) {
                 prime = value;
                 break;
             }
@@ -112,10 +121,13 @@ let libPrime = {
 
 module.exports = exports = libPrime;
 
-// (function() { // test case 
-//     let primes = libPrime.findPrimes(10);
-//     console.log(primes);
+(function() { // test case 
+    let primes = libPrime.findPrimes(10);
+    console.log(primes);
 
-//     let primeFactors = libPrime.findPrimeFactors(10);
-//     console.log(primeFactors);
-// })();
+    let primeFactors = libPrime.findPrimeFactors(10);
+    console.log(primeFactors);
+
+    let primeNext = libPrime.getFirstPrimeAfter(10000);
+    console.log(primeNext);
+})();
