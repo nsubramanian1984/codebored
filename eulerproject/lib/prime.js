@@ -65,12 +65,12 @@ let libPrime = {
 
             divisor = Math.floor(value / primeFactor);
 
-            if (divisor === 1)
-                break;
-
             if (divisor * primeFactor === value) {
                 primeFactorsArray.push(primeFactor);
                 value = divisor;
+
+                if (divisor === 1)
+                    break;
             } else {
                 if (that.isPrime(value)) {
                     primeFactorsArray.push(value);
@@ -130,25 +130,26 @@ module.exports = exports = libPrime;
 
 (function () { // test case
 
-    let value = 10;
-    let flag = libPrime.isPrime(value);
-    console.log("Is " + value + " prime? " + flag);
+    // let value = 10;
+    // let flag = libPrime.isPrime(value);
+    // console.log("Is " + value + " prime? " + flag);
 
-    let primes = libPrime.findPrimes(10);
-    if ([2, 3, 5, 7].join('') === primes.join(''))
-        console.log("findPrimes - Pass");
-    else
-        console.log("findPrimes - Fail");
+    // let primes = libPrime.findPrimes(10);
+    // if ([2, 3, 5, 7].join('') === primes.join(''))
+    //     console.log("findPrimes - Pass");
+    // else
+    //     console.log("findPrimes - Fail");
 
-    let primeFactors = libPrime.findPrimeFactors(144);
-    if ([2, 2, 2, 2, 3].join('') === primeFactors.join(''))
-        console.log("findPrimeFactors - Pass");
-    else
-        console.log("findPrimeFactors - Fail");
+    // let primeFactors = libPrime.findPrimeFactors(698745632);
+    // console.log(primeFactors);
+    // if ([2, 2, 2, 2, 2, 13, 149, 11273].join('') === primeFactors.join(''))
+    //     console.log("findPrimeFactors - Pass");
+    // else
+    //     console.log("findPrimeFactors - Fail");
 
-    let primeNext = libPrime.getFirstPrimeAfter(10000);
-    if (libPrime.isPrime(primeNext))
-        console.log("getFirstPrimeAfter - Pass");
-    else
-        console.log("getFirstPrimeAfter - Fail");
+    // let primeNext = libPrime.getFirstPrimeAfter(10000);
+    // if (libPrime.isPrime(primeNext))
+    //     console.log("getFirstPrimeAfter - Pass");
+    // else
+    //     console.log("getFirstPrimeAfter - Fail");
 })();
