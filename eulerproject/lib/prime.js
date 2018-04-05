@@ -2,6 +2,9 @@ let libPrime = {
     isPrime: function isPrime(value) {
         let flag = true;
 
+        if (value < 2)
+            return false;
+
         for (let min = 2; min <= Math.sqrt(value); min++) {
             let divisor = Math.floor(value / min);
 
@@ -14,10 +17,10 @@ let libPrime = {
         return flag;
     },
 
-    isEvenNumber: function(value) {
+    isEvenNumber: function (value) {
         let divisor = Math.floor(value / 2);
 
-        if(divisor * 2 === value)
+        if (divisor * 2 === value)
             return true;
 
         return false;
@@ -61,6 +64,10 @@ let libPrime = {
         while (!isLastDivisorPrime) {
 
             divisor = Math.floor(value / primeFactor);
+
+            if (divisor === 1)
+                break;
+
             if (divisor * primeFactor === value) {
                 primeFactorsArray.push(primeFactor);
                 value = divisor;
@@ -121,13 +128,27 @@ let libPrime = {
 
 module.exports = exports = libPrime;
 
-(function() { // test case 
-    let primes = libPrime.findPrimes(10);
-    console.log(primes);
+(function () { // test case
 
-    let primeFactors = libPrime.findPrimeFactors(10);
-    console.log(primeFactors);
+    let value = 10;
+    let flag = libPrime.isPrime(value);
+    console.log("Is " + value + " prime? " + flag);
+
+    let primes = libPrime.findPrimes(10);
+    if ([2, 3, 5, 7].join('') === primes.join(''))
+        console.log("findPrimes - Pass");
+    else
+        console.log("findPrimes - Fail");
+
+    let primeFactors = libPrime.findPrimeFactors(144);
+    if ([2, 2, 2, 2, 3].join('') === primeFactors.join(''))
+        console.log("findPrimeFactors - Pass");
+    else
+        console.log("findPrimeFactors - Fail");
 
     let primeNext = libPrime.getFirstPrimeAfter(10000);
-    console.log(primeNext);
+    if (libPrime.isPrime(primeNext))
+        console.log("getFirstPrimeAfter - Pass");
+    else
+        console.log("getFirstPrimeAfter - Fail");
 })();
