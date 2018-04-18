@@ -123,6 +123,55 @@ let libPrime = {
         }
 
         return primes;
+    },
+
+    distinctPrimeFactors: function (count) {
+        // Count denotes the number of distinct prime factors of a number.
+
+        let start = 2;
+        let that = this;
+        let prevNumbers = [];
+        const DIFF = 1;
+
+        while (true) {
+
+            let primeFactors = that.findPrimeFactors(start);
+
+            let uniqueValues = new Set(primeFactors);
+
+            if (uniqueValues.size === parseInt(count)) {
+                if (prevNumbers.length !== 0) {
+                    let restartFlag = false;
+                    let incr = 0;
+
+                    for (let idx = prevNumbers.length - 1; idx >= 0; idx--) {
+                        if ((start - prevNumbers[idx]) !== (DIFF + incr)) {
+                            restartFlag = true;
+                            break;
+                        }
+                        else {
+                        incr++;
+                        }
+                    }
+
+                    if (restartFlag) {
+                        prevNumbers = [start];
+                    }
+                    else {
+                        prevNumbers.push(start);
+                        if (prevNumbers.length === count)
+                            break;
+                    }
+                }
+                else {
+                    prevNumbers = [start];
+                }
+
+            }
+            start++;
+        }
+
+        return prevNumbers;
     }
 };
 
@@ -152,4 +201,24 @@ module.exports = exports = libPrime;
     //     console.log("getFirstPrimeAfter - Pass");
     // else
     //     console.log("getFirstPrimeAfter - Fail");
+
+    if (process.argv && process.argv.length > 2) {
+        let n = parseInt(process.argv[2]);
+        let end = parseInt(process.argv[3]);
+
+        console.log(typeof n);
+
+        if ((typeof n !== "number") || (typeof end !== "number"))
+            return;
+
+        // call prime factor function
+        for (let start = n; start <= end; start++) {
+
+            let primeFactors = libPrime.findPrimeFactors(start);
+            console.log("{" + start + "} " + primeFactors);
+        }
+    }
+    else
+        return;
+
 })();
