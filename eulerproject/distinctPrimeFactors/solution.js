@@ -2,8 +2,14 @@
 
     'use strict';
 
-    let utilPrime = require("./../lib/prime.js");
+    const DISTINCT_COUNT = 3;
 
-    let num = utilPrime.distinctPrimeFactors(4);
-    console.log(num);
+    let utilPrime = require("./../lib/prime.js");
+    let num = [2, 3];
+
+    for (let idx = 0; idx < DISTINCT_COUNT; idx++) {
+        num = utilPrime.distinctPrimeFactors(DISTINCT_COUNT, num[1]);
+        console.log(num);
+    }
+
 })();

@@ -125,10 +125,11 @@ let libPrime = {
         return primes;
     },
 
-    distinctPrimeFactors: function (count) {
-        // Count denotes the number of distinct prime factors of a number.
+    distinctPrimeFactors: function (count, beginSearchFrom) {
+        // Count - Number of distinct prime factors of a number.
+        // beginSearchFrom  -  Some random to begin searching for unique prime factors.
 
-        let start = 2;
+        let start = beginSearchFrom ? beginSearchFrom : 2;
         let that = this;
         let prevNumbers = [];
         const DIFF = 1;
